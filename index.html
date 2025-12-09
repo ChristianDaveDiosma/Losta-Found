@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lost & Found</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="panel" data-screen="auth">
+      <div class="tabs">
+        <button class="tab active" data-target="register">Register</button>
+        <button class="tab" data-target="login">Login</button>
+      </div>
+
+      <div class="form-wrapper">
+        <form id="register" class="form active">
+          <h2>Create Account</h2>
+          <input type="text" placeholder="Full Name" required>
+          <input type="email" placeholder="Email" required>
+          <input type="password" placeholder="Password" required>
+          <select required>
+            <option value="">Role</option>
+            <option value="user">User</option>
+            <option value="moderator">Moderator</option>
+          </select>
+          <button type="submit">Register</button>
+        </form>
+
+        <form id="login" class="form">
+          <h2>Welcome Back</h2>
+          <input type="email" placeholder="Email" required>
+          <input type="password" placeholder="Password" required>
+          <select required>
+            <option value="">Role</option>
+            <option value="user">User</option>
+            <option value="moderator">Moderator</option>
+            <option value="admin">Admin</option>
+          </select>
+          <button type="submit">Login</button>
+          <div class="divider"><span>or</span></div>
+          <div class="oauth">
+            <a class="oauth-btn google" href="oauth_google.php" target="_blank" rel="noopener">
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="" width="20" height="20">
+              Continue with Google
+            </a>
+            <a class="oauth-btn facebook" href="oauth_facebook.php" target="_blank" rel="noopener">
+              <img src="https://www.svgrepo.com/show/452196/facebook-1.svg" alt="" width="20" height="20">
+              Continue with Facebook
+            </a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="dashboard hidden" data-screen="dashboard">
+      <header>
+        <div>
+          <h1>Lost & Found Dashboard</h1>
+          <p id="user-label">Not signed in</p>
+        </div>
+        <input id="search" type="search" placeholder="Search by item or location">
+        <button id="logout" class="ghost">Logout</button>
+      </header>
+
+      <div class="dash-views">
+        <div class="dash-view hidden" id="admin-view">
+          <div class="column-head">
+            <h3>Admin & Moderator Dashboard</h3>
+            <span class="badge" id="admin-badge">locked</span>
+          </div>
+          <p class="hint">Upload or manage all reported items.</p>
+          <form id="upload" enctype="multipart/form-data" class="upload-form">
+            <div class="form-row">
+              <input type="text" name="name" placeholder="Item name" required>
+              <input type="text" name="location" placeholder="Found location" required>
+            </div>
+            <textarea name="description" placeholder="Description" required></textarea>
+            <div class="file-upload-wrapper">
+              <label for="image-upload" class="file-label">
+                <span>Choose Image (Optional)</span>
+                <input type="file" name="image" id="image-upload" accept="image/*">
+              </label>
+            </div>
+            <button type="submit" class="upload-submit-btn">Upload Item</button>
+          </form>
+          <small class="hint">Only admins or moderators can upload lost items.</small>
+          <ul id="admin-inventory"></ul>
+        </div>
+
+        <div class="dash-view hidden" id="user-view">
+          <div class="column-head">
+            <h3>User Dashboard</h3>
+            <span class="badge" id="user-badge">locked</span>
+          </div>
+          <p class="hint">Browse, search, and claim items that match what you lost.</p>
+          <ul id="user-available"></ul>
+          <h4>Pending Claims</h4>
+          <p class="hint">Claims stay pending until staff verifies ownership.</p>
+          <ul id="claims"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
